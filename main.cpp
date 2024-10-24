@@ -75,7 +75,7 @@ int main() {
             else {
                 K.update(std::chrono::duration_cast<std::chrono::milliseconds>(
                              std::chrono::high_resolution_clock::now() - start).count(), x, y);
-                auto [futureX, futureY] = K.trajPred(10);
+                auto [futureX, futureY] = K.trajPred(100);
                 cv::circle(frame, cv::Point(futureX, futureY), 20, cv::Scalar(255, 0, 0), -1); // Green dot
             }
         }

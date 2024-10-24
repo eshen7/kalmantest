@@ -15,7 +15,8 @@ class Kalman {
     void updateTime(double newTime);
     void updateTransitionMatrix();
     void update(double newTime, int x, int y);
-    void updateMeasurement(int x, int y);
+    void updateMeasurementPosition(int x, int y);
+    void updateMeasurementVelocity();
     void stateUpdate(int x, int y);
     void predict();
     std::tuple<int, int> trajPred(double deltaTime);
@@ -27,10 +28,10 @@ private:
     timestampedMatrix currentStateEstimate = timestampedMatrix(); // x, y, xvelo, yvelo
     timestampedMatrix currentStatePrediction = timestampedMatrix();
     timestampedMatrix currentMeasurementMatrix = timestampedMatrix();
-    Eigen::Matrix<double, 4, 1> priorStateEstimate;
+    timestampedMatrix priorStateEstimate = timestampedMatrix();
     Eigen::Matrix<double, 4, 4> futurePredMatrix = Eigen::MatrixXd::Identity(4, 4);
     Eigen::Matrix<double, 4, 4> stateTransitionMatrix = Eigen::MatrixXd::Identity(4, 4);
-    Eigen::Matrix<double, 4, 4> currentKalmanGain = Eigen::MatrixXd::Identity(4, 4) * 0.5; // constant for testing;
+    Eigen::Matrix<double, 4, 4> currentKalmanGain = Eigen::MatrixXd::Identity(4, 4); // constant for testing;
 };
 
 #endif
